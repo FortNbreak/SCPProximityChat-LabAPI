@@ -23,17 +23,17 @@ namespace ScpProximityChat_LabAPI
             if (FpcNoclip.IsPermitted(player))
                 return true;
 
-            if (!ScpProximityChat.SharedConfig.AllowedRoles.Contains(player.roleManager.CurrentRole.RoleTypeId))
+            if (!ScpProximityChat.Instance.Config.AllowedRoles.Contains(player.roleManager.CurrentRole.RoleTypeId))
                 return true;
 
             if (!ToggledPlayers.Add(player))
             {
                 ToggledPlayers.Remove(player);
-                player.hints.Show(new TextHint(ScpProximityChat.SharedConfig.ProximityChatDisabledMessage, [new StringHintParameter(string.Empty)], null, 4));
+                player.hints.Show(new TextHint(ScpProximityChat.Instance.Config.ProximityChatDisabledMessage, [new StringHintParameter(string.Empty)], null, 4));
                 return false;
             }
 
-            player.hints.Show(new TextHint(ScpProximityChat.SharedConfig.ProximityChatEnabledMessage, [new StringHintParameter(string.Empty)], null, 4));
+            player.hints.Show(new TextHint(ScpProximityChat.Instance.Config.ProximityChatEnabledMessage, [new StringHintParameter(string.Empty)], null, 4));
             return false;
         }
 
@@ -45,11 +45,11 @@ namespace ScpProximityChat_LabAPI
             if (!ReferenceHub.TryGetHubNetID(connection.identity.netId, out ReferenceHub player))
                 return true;
 
-            if (!ScpProximityChat.SharedConfig.AllowedRoles.Contains(player.roleManager.CurrentRole.RoleTypeId) || (ScpProximityChat.SharedConfig.ToggleChat && !ToggledPlayers.Contains(player)))
+            if (!ScpProximityChat.Instance.Config.AllowedRoles.Contains(player.roleManager.CurrentRole.RoleTypeId) || (ScpProximityChat.Instance.Config.ToggleChat && !ToggledPlayers.Contains(player)))
                 return true;
 
             SendProximityMessage(message);
-            return !ScpProximityChat.SharedConfig.ToggleChat;
+            return !ScpProximityChat.Instance.Config.ToggleChat;
         }
 
         private static void SendProximityMessage(VoiceMessage msg)
@@ -62,7 +62,7 @@ namespace ScpProximityChat_LabAPI
                 if (referenceHub.roleManager.CurrentRole is not IVoiceRole voiceRole2)
                     continue;
 
-                if (Vector3.Distance(msg.Speaker.transform.position, referenceHub.transform.position) >= ScpProximityChat.SharedConfig.MaxProximityDistance)
+                if (Vector3.Distance(msg.Speaker.transform.position, referenceHub.transform.position) >= ScpProximityChat.Instance.Config.MaxProximityDistance)
                     continue;
 
                 if (voiceRole2.VoiceModule.ValidateReceive(msg.Speaker, VoiceChatChannel.Proximity) is VoiceChatChannel.None)

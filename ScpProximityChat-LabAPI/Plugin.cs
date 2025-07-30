@@ -19,12 +19,10 @@ namespace ScpProximityChat_LabAPI
         public override string Name { get; } = "ScpProximityChat";
         public override string Description { get; } = "Makes SCPs able to talk inside the proximity chat.";
         public override string Author { get; } = "FortNbreak";
-        public override Version Version { get; } = new Version(1, 0, 0);
+        public override Version Version { get; } = new Version(1, 1, 0);
         public override Version RequiredApiVersion { get; } = new Version(LabApiProperties.CompiledVersion);
         public override string ConfigFileName { get; set; } = "scpproximitychat.yml";
         private static readonly Harmony HarmonyPatcher = new("scpproximitymodule.fortnbreak.com");
-        public static Config SharedConfig { get; private set; }
-
         public override void Enable()
         {
             if (!base.Config.Enabled)
@@ -36,10 +34,6 @@ namespace ScpProximityChat_LabAPI
             Logger.Info("Starting plugin...");
 
             ScpProximityChat.Instance = this;
-
-            Logger.Info("Loading config.");
-
-            SharedConfig = base.Config;
 
             Logger.Info("Registering events...");
 
@@ -59,8 +53,6 @@ namespace ScpProximityChat_LabAPI
             ScpProximityChat.Instance = null;
 
             Logger.Info("Loading config.");
-
-            SharedConfig = null;
 
             Logger.Info("Unregistering events...");
 

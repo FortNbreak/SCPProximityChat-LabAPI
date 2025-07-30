@@ -18,13 +18,13 @@ namespace ScpProximityChat_LabAPI
 
         public override void OnPlayerChangedRole(PlayerChangedRoleEventArgs ev)
         {
-            if (!ScpProximityChat.SharedConfig.SendBroadcastOnRoleChange)
+            if (!ScpProximityChat.Instance.Config.SendBroadcastOnRoleChange)
                 return;
 
-            if (!ScpProximityChat.SharedConfig.AllowedRoles.Contains(ev.NewRole.RoleTypeId))
+            if (!ScpProximityChat.Instance.Config.AllowedRoles.Contains(ev.NewRole.RoleTypeId))
                 return;
 
-            ev.Player.SendBroadcast(ScpProximityChat.SharedConfig.BroadcastMessage, ScpProximityChat.SharedConfig.BroadcastDuration);
+            ev.Player.SendBroadcast(ScpProximityChat.Instance.Config.BroadcastMessage, ScpProximityChat.Instance.Config.BroadcastDuration);
         }
     }
 }
