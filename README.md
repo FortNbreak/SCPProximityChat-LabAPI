@@ -1,5 +1,5 @@
 # SCP Proximity Chat
-This plugin allows SCPs to talk with Proximity Chat to humans and SCPs. Updated to work with LabAPI
+This plugin allows SCPs to talk with Proximity Chat to humans. Updated to work with LabAPI
 Forked from [Jesus-QC/ScpProximityChat](https://github.com/Jesus-QC/ScpProximityChat/)
 
 # How to use
