@@ -9,7 +9,6 @@ using LabApi.Features;
 using LabApi.Features.Console;
 using LabApi.Loader.Features.Plugins.Enums;
 using HarmonyLib;
-using AdminToys;
 
 namespace ScpProximityChat_LabAPI
 {
